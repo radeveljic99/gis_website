@@ -1,0 +1,9 @@
+.content-height {
+  height: 90vh;
+}
+
+@media (max-width: 768px) {
+  .content-height {
+      height: 100vh;
+  }
+}
