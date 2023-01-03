@@ -17,7 +17,6 @@ export class CardComponent implements OnInit, OnChanges {
   }
 
   openGallery(): void {
-    console.log('opening gallery with images', this.place.images);
     this.galleryEmmiter.emit(this.place.images);
   }
 
