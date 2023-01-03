@@ -1,0 +1,18 @@
+.gallery {
+  position: fixed !important;
+  background: black !important;
+}
+
+.image-wrapper {
+  width: 1140px !important;
+}
+
+.swiper-container {
+  max-width: 100% !important;
+}
+
+.image {
+  height: 100%;
+}
+
+
