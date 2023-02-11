@@ -5,9 +5,16 @@
          [src]="place.images[0].path" alt="GIS"/>
   </button>
   <div class="p-5">
-    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-      {{ place.name }}
-    </h5>
+    <div class="flex flex-row justify-between mb-5">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+        {{ place.name }}
+      </h5>
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+              (click)="showLocation()">
+        Prikaži Lokaciju
+      </button>
+    </div>
+
     <p class="mb-3 font-normal text-gray-700">
       {{ place.description }}
     </p>

@@ -3,6 +3,7 @@ import * as L from 'leaflet';
 import { PlaceService } from './services/place.service';
 import { Place } from './models/place.model';
 import { Image } from './models/image.model';
+import { Location } from './models/location.model';
 
 @Component({
   selector: 'app-root',
@@ -28,8 +29,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-
-
     this.map = L.map('map').setView([this.longitude, this.latitude], 8.5);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
@@ -68,8 +67,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   attachPins(): void {
 
     const icon = L.icon({
-      iconUrl: 'https://w7.pngwing.com/pngs/567/857/png-transparent-red-and-gray-lever-marker-pen-computer-icons-location-place-tag-s-angle-sphere-map.png',
-      iconSize: [30, 30],
+      iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-icon.png',
+      iconSize: [20, 30],
       iconAnchor: [0, 0],
       popupAnchor: [20, 0]
     });
@@ -81,6 +80,21 @@ export class AppComponent implements OnInit, AfterViewInit {
           .openPopup()
       }
     }
+  }
+
+  showLocationPopup(place: Place): void {
+
+    const icon = L.icon({
+      iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-icon.png',
+      iconSize: [20, 30],
+      iconAnchor: [0, 0],
+      popupAnchor: [20, 0]
+    });
+
+
+    L.marker([place.location.latitude, place.location.longitude], {icon: icon}).addTo(this.map)
+      .bindPopup(place.name)
+      .openPopup()
   }
 
 
