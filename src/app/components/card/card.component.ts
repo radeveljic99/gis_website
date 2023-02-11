@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Place } from '../../models/place.model';
 import { Image } from '../../models/image.model';
-import { Location } from '../../models/location.model';
 
 @Component({
   selector: 'app-card',

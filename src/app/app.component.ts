@@ -3,7 +3,6 @@ import * as L from 'leaflet';
 import { PlaceService } from './services/place.service';
 import { Place } from './models/place.model';
 import { Image } from './models/image.model';
-import { Location } from './models/location.model';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +14,12 @@ export class AppComponent implements OnInit, AfterViewInit {
   longitude: number = 42.7087;
   latitude: number = 19.3744;
   map: any;
+  icon: any = L.icon({
+    iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-icon.png',
+    iconSize: [20, 30],
+    iconAnchor: [0, 0],
+    popupAnchor: [20, 0]
+  });
   places: Place [] = [];
   semaphores: any = {
     galleryOpened: false
@@ -46,6 +51,11 @@ export class AppComponent implements OnInit, AfterViewInit {
           this.places = res;
           this.attachPins();
         })
+      }, error => {
+        this.placeService.all().subscribe( res => {
+          this.places = res;
+          this.attachPins();
+        })
       });
     } else {
       this.placeService.all().subscribe(res => {
@@ -66,16 +76,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   attachPins(): void {
 
-    const icon = L.icon({
-      iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-icon.png',
-      iconSize: [20, 30],
-      iconAnchor: [0, 0],
-      popupAnchor: [20, 0]
-    });
-
     if (this.places.length) {
       for (let place of this.places) {
-        L.marker([place.location.latitude, place.location.longitude], {icon: icon}).addTo(this.map)
+        L.marker([place.location.latitude, place.location.longitude], {icon: this.icon}).addTo(this.map)
           .bindPopup(place.name)
           .openPopup()
       }
@@ -84,15 +87,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   showLocationPopup(place: Place): void {
 
-    const icon = L.icon({
-      iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-icon.png',
-      iconSize: [20, 30],
-      iconAnchor: [0, 0],
-      popupAnchor: [20, 0]
-    });
-
-
-    L.marker([place.location.latitude, place.location.longitude], {icon: icon}).addTo(this.map)
+    L.marker([place.location.latitude, place.location.longitude], {icon: this.icon}).addTo(this.map)
       .bindPopup(place.name)
       .openPopup()
   }
